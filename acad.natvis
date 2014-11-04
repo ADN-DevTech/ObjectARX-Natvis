@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AutoVisualizer xmlns="http://schemas.microsoft.com/vstudio/debugger/natvis/2010">
+
+  <!-- for acad/arx types -->
+
+  <Type Name="AcString">
+    <DisplayString Condition="mnFlags==0">""</DisplayString>
+    <DisplayString Condition="mnFlags==1">{mszStr,s}</DisplayString>
+    <DisplayString Condition="mnFlags==2">{mchr.mwszStr,su}</DisplayString>
+    <DisplayString Condition="mnFlags==3">{mptr.mpszData,s}</DisplayString>
+    <DisplayString Condition="mnFlags==4">{mptr.mpwszData,su}</DisplayString>
+    <DisplayString Condition="mnFlags==5">{*(wchar_t **)(mptr.mpPtrAndData),su}</DisplayString>
+    <StringView Condition="mnFlags==0">""</StringView>
+    <StringView Condition="mnFlags==1">mszStr,s</StringView>
+    <StringView Condition="mnFlags==2">mchr.mwszStr,su</StringView>
+    <StringView Condition="mnFlags==3">mptr.mpszData,s</StringView>
+    <StringView Condition="mnFlags==4">mptr.mpwszData,su</StringView>
+    <StringView>mptr.mpPtrAndData</StringView>
+  </Type>
+
+  <Type Name="AcArray&lt;*&gt;">
+    <DisplayString>{{Len = {mLogicalLen}}}</DisplayString>
+    <Expand>
+      <Item Name="Len">mLogicalLen</Item>
+      <Item Name="Buf Siz">mPhysicalLen</Item>
+      <ArrayItems>
+        <Size>mLogicalLen</Size>
+        <ValuePointer>mpArray</ValuePointer>
+      </ArrayItems>
+    </Expand>
+  </Type>
+
+  <Type Name="resbuf">
+    <DisplayString Condition="restype==1">{resval.rreal}</DisplayString>
+    <DisplayString Condition="restype==5001">{resval.rreal}</DisplayString>
+    <DisplayString Condition="restype==2">{resval.rpoint[0]},{resval.rpoint[1]}</DisplayString>
+    <DisplayString Condition="restype==5002">{resval.rpoint[0]},{resval.rpoint[1]}</DisplayString>
+    <DisplayString Condition="restype==3">{resval.rint}</DisplayString>
+    <DisplayString Condition="restype==5003">{resval.rint}</DisplayString>
+    <DisplayString Condition="restype==4">{resval.rreal}</DisplayString>
+    <DisplayString Condition="restype==5004">{resval.rreal}</DisplayString>
+    <DisplayString Condition="restype==5">{resval.rstring}</DisplayString>
+    <DisplayString Condition="restype==5005">{resval.rstring}</DisplayString>
+    <DisplayString Condition="restype==9">{resval.rpoint[0]},{resval.rpoint[1]},{resval.rpoint[2]}</DisplayString>
+    <DisplayString Condition="restype==5009">{resval.rpoint[0]},{resval.rpoint[1]},{resval.rpoint[2]}</DisplayString>
+    <DisplayString Condition="restype==10">{resval.rlong}</DisplayString>
+    <DisplayString Condition="restype==5010">{resval.rlong}</DisplayString>
+    <DisplayString Condition="restype==16">list-begin</DisplayString>
+    <DisplayString Condition="restype==5016">list-begin</DisplayString>
+    <DisplayString Condition="restype==17">list-end</DisplayString>
+    <DisplayString Condition="restype==5017">list-end</DisplayString>
+    <Expand>
+      <Item Name="restype">restype</Item>
+      <Item Name="rbnext">rbnext</Item>
+    </Expand>
+  </Type>
+
+</AutoVisualizer>
