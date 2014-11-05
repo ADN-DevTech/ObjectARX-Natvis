@@ -1,7 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <AutoVisualizer xmlns="http://schemas.microsoft.com/vstudio/debugger/natvis/2010">
 
+  <!-- Version 1.0c 4nov14 -->
   <!-- for acad/arx types -->
+
+  <Type Name="AcArray&lt;*&gt;">
+    <DisplayString>{{Len = {mLogicalLen}}}</DisplayString>
+    <Expand>
+      <Item Name="Len">mLogicalLen</Item>
+      <Item Name="Buf Siz">mPhysicalLen</Item>
+      <ArrayItems>
+        <Size>mLogicalLen</Size>
+        <ValuePointer>mpArray</ValuePointer>
+      </ArrayItems>
+    </Expand>
+  </Type>
+
+  <Type Name="AcRxClass">
+    <DisplayString Condition="m_pImp!=0">{*(((wchar_t **)m_pImp)+1),su}</DisplayString>
+  </Type>
 
   <Type Name="AcString">
     <DisplayString Condition="mnFlags==0">""</DisplayString>
@@ -18,16 +35,10 @@
     <StringView>mptr.mpPtrAndData</StringView>
   </Type>
 
-  <Type Name="AcArray&lt;*&gt;">
-    <DisplayString>{{Len = {mLogicalLen}}}</DisplayString>
-    <Expand>
-      <Item Name="Len">mLogicalLen</Item>
-      <Item Name="Buf Siz">mPhysicalLen</Item>
-      <ArrayItems>
-        <Size>mLogicalLen</Size>
-        <ValuePointer>mpArray</ValuePointer>
-      </ArrayItems>
-    </Expand>
+  <Type Name="CAdUiPathname">
+    <DisplayString Condition="m_pathbuffer!=0">{*m_pathbuffer,su}</DisplayString>
+    <DisplayString Condition="m_this_type==0">NO_PATH</DisplayString>
+    <StringView Condition="m_pathbuffer!=0">*m_pathbuffer</StringView>
   </Type>
 
   <Type Name="resbuf">
