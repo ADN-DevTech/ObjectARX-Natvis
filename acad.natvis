@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <AutoVisualizer xmlns="http://schemas.microsoft.com/vstudio/debugger/natvis/2010">
 
-  <!-- Version 1.0c 4nov14 -->
+  <!-- Version 1.0e 11nov14 -->
   <!-- for acad/arx types -->
 
   <Type Name="AcArray&lt;*&gt;">
@@ -41,28 +41,89 @@
     <StringView Condition="m_pathbuffer!=0">*m_pathbuffer</StringView>
   </Type>
 
+  <Type Name="CAdUiVolumeDescriptor">
+    <DisplayString Condition="m_vol_localname!=0">{*m_vol_localname}</DisplayString>
+    <StringView Condition="m_vol_localname!=0">*m_vol_localname</StringView>
+  </Type>
+
   <Type Name="resbuf">
-    <DisplayString Condition="restype==1">{resval.rreal}</DisplayString>
-    <DisplayString Condition="restype==5001">{resval.rreal}</DisplayString>
-    <DisplayString Condition="restype==2">{resval.rpoint[0]},{resval.rpoint[1]}</DisplayString>
+    <!--ARX/Lisp Function arg-->
+    <DisplayString Condition="restype==5000">rtnone</DisplayString>
+    <DisplayString Condition="restype==5001">{resval.rreal} rreal</DisplayString>
     <DisplayString Condition="restype==5002">{resval.rpoint[0]},{resval.rpoint[1]}</DisplayString>
-    <DisplayString Condition="restype==3">{resval.rint}</DisplayString>
-    <DisplayString Condition="restype==5003">{resval.rint}</DisplayString>
-    <DisplayString Condition="restype==4">{resval.rreal}</DisplayString>
-    <DisplayString Condition="restype==5004">{resval.rreal}</DisplayString>
-    <DisplayString Condition="restype==5">{resval.rstring}</DisplayString>
+    <DisplayString Condition="restype==5003">{resval.rint} rint</DisplayString>
+    <DisplayString Condition="restype==5004">{resval.rreal} rreal</DisplayString>
     <DisplayString Condition="restype==5005">{resval.rstring}</DisplayString>
-    <DisplayString Condition="restype==9">{resval.rpoint[0]},{resval.rpoint[1]},{resval.rpoint[2]}</DisplayString>
+    <DisplayString Condition="restype==5006">soft pointer id</DisplayString>
+    <DisplayString Condition="restype==5007">pick set</DisplayString>
+    <DisplayString Condition="restype==5008">orientation</DisplayString>
     <DisplayString Condition="restype==5009">{resval.rpoint[0]},{resval.rpoint[1]},{resval.rpoint[2]}</DisplayString>
-    <DisplayString Condition="restype==10">{resval.rlong}</DisplayString>
-    <DisplayString Condition="restype==5010">{resval.rlong}</DisplayString>
-    <DisplayString Condition="restype==16">list-begin</DisplayString>
+    <DisplayString Condition="restype==5010">{resval.rlong} rlong</DisplayString>
     <DisplayString Condition="restype==5016">list-begin</DisplayString>
-    <DisplayString Condition="restype==17">list-end</DisplayString>
     <DisplayString Condition="restype==5017">list-end</DisplayString>
+    <DisplayString Condition="restype==5018">dotted pair</DisplayString>
+    <DisplayString Condition="restype==5031">{resval.mnInt64} int64</DisplayString>
+
+    <!--DXF/XData String-->
+    <DisplayString Condition="(restype&gt;=1) &amp;&amp; (restype&lt;=9)">{resval.rstring}</DisplayString>
+    <DisplayString Condition="(restype&gt;=100) &amp;&amp; (restype&lt;=103)">{resval.rstring}</DisplayString>
+    <DisplayString Condition="restype==105">{resval.rstring}</DisplayString>
+    <DisplayString Condition="(restype&gt;=300) &amp;&amp; (restype&lt;=309)">{resval.rstring}</DisplayString>
+    <DisplayString Condition="restype==410">{resval.rstring}</DisplayString>
+    <DisplayString Condition="(restype&gt;=430) &amp;&amp; (restype&lt;=439)">{resval.rstring}</DisplayString>
+    <DisplayString Condition="(restype&gt;=470) &amp;&amp; (restype&lt;=479)">{resval.rstring}</DisplayString>
+    <DisplayString Condition="(restype&gt;=999) &amp;&amp; (restype&lt;=1003)">{resval.rstring}</DisplayString>
+
+    <!--DXF/XData Double-->
+    <DisplayString Condition="(restype&gt;=38) &amp;&amp; (restype&lt;=59)">{resval.rreal} rreal</DisplayString>
+    <DisplayString Condition="(restype&gt;=140) &amp;&amp; (restype&lt;=149)">{resval.rreal} rreal</DisplayString>
+    <DisplayString Condition="(restype&gt;=460) &amp;&amp; (restype&lt;=469)">{resval.rreal} rreal</DisplayString>
+    <DisplayString Condition="(restype&gt;=1040) &amp;&amp; (restype&lt;=1042)">{resval.rreal} rreal</DisplayString>
+
+    <!--DXF/XData Point-->
+    <DisplayString Condition="(restype&gt;=10) &amp;&amp; (restype&lt;=17)">
+                                {resval.rpoint[0]},{resval.rpoint[1]},{resval.rpoint[2]}</DisplayString>
+    <DisplayString Condition="(restype&gt;=110) &amp;&amp; (restype&lt;=112)">
+                                {resval.rpoint[0]},{resval.rpoint[1]},{resval.rpoint[2]}</DisplayString>
+    <DisplayString Condition="(restype&gt;=210) &amp;&amp; (restype&lt;=219)">
+                                {resval.rpoint[0]},{resval.rpoint[1]},{resval.rpoint[2]}</DisplayString>
+    <DisplayString Condition="(restype&gt;=1010) &amp;&amp; (restype&lt;=1013)">
+                                {resval.rpoint[0]},{resval.rpoint[1]},{resval.rpoint[2]}</DisplayString>
+
+    <!--DXF/XData Int16-->
+    <DisplayString Condition="(restype&gt;=60) &amp;&amp; (restype&lt;=79)">{resval.rint} rint</DisplayString>
+    <DisplayString Condition="(restype&gt;=270) &amp;&amp; (restype&lt;=279)">{resval.rint} rint</DisplayString>
+    <DisplayString Condition="(restype&gt;=370) &amp;&amp; (restype&lt;=389)">{resval.rint} rint</DisplayString>
+    <DisplayString Condition="(restype&gt;=400) &amp;&amp; (restype&lt;=409)">{resval.rint} rint</DisplayString>
+    <DisplayString Condition="restype==1070">{resval.rint} rint</DisplayString>
+
+    <!--DXF/XData Int32-->
+    <DisplayString Condition="(restype&gt;=90) &amp;&amp; (restype&lt;=99)">{resval.rlong} rlong</DisplayString>
+    <DisplayString Condition="(restype&gt;=420) &amp;&amp; (restype&lt;=429)">{resval.rlong} rlong</DisplayString>
+    <DisplayString Condition="(restype&gt;=440) &amp;&amp; (restype&lt;=459)">{resval.rlong} rlong</DisplayString>
+    <DisplayString Condition="restype==1071">{resval.rlong} rlong</DisplayString>
+
+    <!--DXF/XData ObjectId-->
+    <DisplayString Condition="(restype&gt;=330) &amp;&amp; (restype&lt;=339)">soft pointer id</DisplayString>
+    <DisplayString Condition="(restype&gt;=340) &amp;&amp; (restype&lt;=349)">hard pointer id</DisplayString>
+    <DisplayString Condition="(restype&gt;=350) &amp;&amp; (restype&lt;=359)">soft owner id</DisplayString>
+    <DisplayString Condition="(restype&gt;=360) &amp;&amp; (restype&lt;=369)">hard owner id</DisplayString>
+    <DisplayString Condition="(restype&gt;=390) &amp;&amp; (restype&lt;=399)">hard pointer id</DisplayString>
+
+    <!--DXF/XData 8bit int-->
+    <DisplayString Condition="(restype&gt;=280) &amp;&amp; (restype&lt;=289)">{resval.rint} 8-bit rint</DisplayString>
+    <DisplayString Condition="(restype&gt;=290) &amp;&amp; (restype&lt;=299)">{resval.rint} bool rint</DisplayString>
+
+    <!--DXF/XData Binary Chunk -->
+    <DisplayString Condition="(restype&gt;=310) &amp;&amp; (restype&lt;=319)">binary size={resval.rbinary.clen}</DisplayString>
+    <DisplayString Condition="restype==1004">binary size={resval.rbinary.clen}</DisplayString>
+
+    <!--DXF/XData Int64 -->
+    <DisplayString Condition="(restype&gt;=160) &amp;&amp; (restype&lt;=169)">{resval.mnInt64} int64</DisplayString>
+
     <Expand>
-      <Item Name="restype">restype</Item>
       <Item Name="rbnext">rbnext</Item>
+      <Item Name="restype">restype</Item>
     </Expand>
   </Type>
 
