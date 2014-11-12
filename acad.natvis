@@ -16,9 +16,11 @@
     </Expand>
   </Type>
 
+  <!-- see below
   <Type Name="AcRxClass">
     <DisplayString Condition="m_pImp!=0">{*(((wchar_t **)m_pImp)+1),su}</DisplayString>
   </Type>
+  -->
 
   <Type Name="AcString">
     <DisplayString Condition="mnFlags==0">""</DisplayString>
@@ -124,6 +126,227 @@
     <Expand>
       <Item Name="rbnext">rbnext</Item>
       <Item Name="restype">restype</Item>
+    </Expand>
+  </Type>
+
+  <!-- the following visualizers work in conjunction with the 2 files AcGeImp.h and AcImp.h.
+       Just include these 2 files in your stdafx.h
+  -->
+  <!-- 3d AcGe classes -->
+  <Type Name="AcGeLinearEnt3d">
+    <DisplayString Condition="mpImpEnt!=0">{{start={((AcGeImpLinearEnt3d*)(mpImpEnt))->m_startPoint} dir={((AcGeImpLinearEnt3d*)(mpImpEnt))->m_Direction}}}</DisplayString>
+    <Expand>
+			<Item Condition="mpImpEnt!=0" Name="[m_startPoint]">((AcGeImpLinearEnt3d*)(mpImpEnt))->m_startPoint</Item>
+			<Item Condition="mpImpEnt!=0" Name="[m_Direction]" >((AcGeImpLinearEnt3d*)(mpImpEnt))->m_Direction</Item>
+    </Expand>
+  </Type>
+
+  <Type Name="AcGePlane">
+		<DisplayString Condition="mpImpEnt!=0">{{origin={((AcGeImpPlanarEnt*)(mpImpEnt))->m_Origin} u={((AcGeImpPlanarEnt*)(mpImpEnt))->m_uAxis} v={((AcGeImpPlanarEnt*)(mpImpEnt))->m_vAxis}}}</DisplayString>
+		<Expand>
+      <Item Condition="mpImpEnt!=0" Name="[m_Origin]">((AcGeImpPlanarEnt*)(mpImpEnt))->m_Origin</Item>
+			<Item Condition="mpImpEnt!=0" Name="[m_uAxis]">((AcGeImpPlanarEnt*)(mpImpEnt))->m_uAxis</Item>
+			<Item Condition="mpImpEnt!=0" Name="[m_vAxis]">((AcGeImpPlanarEnt*)(mpImpEnt))->m_vAxis</Item>
+    </Expand>
+  </Type>
+
+  <Type Name="AcGeBoundBlock3d">
+    <DisplayString>{{is box={((AcGeImpBoundBlock3d*)(mpImpEnt))->m_bIsBox} base={((AcGeImpBoundBlock3d*)(mpImpEnt))->m_Base} xdir={((AcGeImpBoundBlock3d*)(mpImpEnt))->m_xDir} ydir={((AcGeImpBoundBlock3d*)(mpImpEnt))->m_yDir} zdir={((AcGeImpBoundBlock3d*)(mpImpEnt))->m_zDir}}}</DisplayString>
+    <Expand>
+			<Item Condition="mpImpEnt!=0" Name="[m_bIsBox]">((AcGeImpBoundBlock3d*)(mpImpEnt))->m_bIsBox</Item>
+			<Item Condition="mpImpEnt!=0" Name="[m_Base]"  >((AcGeImpBoundBlock3d*)(mpImpEnt))->m_Base</Item>
+			<Item Condition="mpImpEnt!=0" Name="[m_xDir]"  >((AcGeImpBoundBlock3d*)(mpImpEnt))->m_xDir</Item>
+			<Item Condition="mpImpEnt!=0" Name="[m_yDir]"  >((AcGeImpBoundBlock3d*)(mpImpEnt))->m_yDir</Item>
+			<Item Condition="mpImpEnt!=0" Name="[m_zDir]"  >((AcGeImpBoundBlock3d*)(mpImpEnt))->m_zDir</Item>
+    </Expand>
+  </Type>
+
+  <!-- 2d AcGe classes -->
+  <Type Name="AcGeLinearEnt2d">
+		<DisplayString Condition="mpImpEnt!=0">{{start={((AcGeImpLinearEnt2d*)(mpImpEnt))->m_startPoint} dir={((AcGeImpLinearEnt2d*)(mpImpEnt))->m_Direction}}}</DisplayString>
+    <Expand>
+			<Item Condition="mpImpEnt!=0" Name="[m_startPoint]">((AcGeImpLinearEnt2d*)(mpImpEnt))->m_startPoint</Item>
+			<Item Condition="mpImpEnt!=0" Name="[m_Direction]" >((AcGeImpLinearEnt2d*)(mpImpEnt))->m_Direction</Item>
+    </Expand>
+  </Type>
+
+  <Type Name="AcGeBoundBlock2d">
+		<DisplayString Condition="mpImpEnt!=0">{{is box={((AcGeImpBoundBlock2d*)(mpImpEnt))->m_bIsBox} base={((AcGeImpBoundBlock2d*)(mpImpEnt))->m_Base} xdir={((AcGeImpBoundBlock2d*)(mpImpEnt))->m_xDir} ydir={((AcGeImpBoundBlock2d*)(mpImpEnt))->m_yDir}}}</DisplayString>
+    <Expand>
+			<Item Condition="mpImpEnt!=0" Name="[m_bIsBox]">((AcGeImpBoundBlock2d*)(mpImpEnt))->m_bIsBox</Item>
+			<Item Condition="mpImpEnt!=0" Name="[m_Base]"  >((AcGeImpBoundBlock2d*)(mpImpEnt))->m_Base</Item>
+			<Item Condition="mpImpEnt!=0" Name="[m_xDir]"  >((AcGeImpBoundBlock2d*)(mpImpEnt))->m_xDir</Item>
+			<Item Condition="mpImpEnt!=0" Name="[m_yDir]"  >((AcGeImpBoundBlock2d*)(mpImpEnt))->m_yDir</Item>
+    </Expand>
+  </Type>
+
+  <Type Name="AcGeInterval">
+    <DisplayString>{{lower={((AcGeImpInterval*)(mpImpInt))->m_dLowerBound} upper={((AcGeImpInterval*)(mpImpInt))->m_dUpperBound} toleranz={((AcGeImpInterval*)(mpImpInt))->m_dTolerance}}}</DisplayString>
+    <Expand>
+			<Item Condition="mpImpEnt!=0" Name="[m_dLowerBound]">((AcGeImpInterval*)(mpImpInt))->m_dLowerBound</Item>
+			<Item Condition="mpImpEnt!=0" Name="[m_dUpperBound]">((AcGeImpInterval*)(mpImpInt))->m_dUpperBound</Item>
+			<Item Condition="mpImpEnt!=0" Name="[m_dTolerance]" >((AcGeImpInterval*)(mpImpInt))->m_dTolerance</Item>
+			<Item Condition="mpImpEnt!=0" Name="[m_bBoundedAbove]" ExcludeView="simple">((AcGeImpInterval*)(mpImpInt))->m_Flags.m_bBoundedAbove</Item>
+			<Item Condition="mpImpEnt!=0" Name="[m_bBoundedBelow]" ExcludeView="simple">((AcGeImpInterval*)(mpImpInt))->m_Flags.m_bBoundedBelow</Item>
+    </Expand>
+  </Type>
+
+  <!-- AcDb classes -->
+	<Type Name="AcRxClass">
+		<DisplayString>{{{(m_pImp)->m_strName}}}</DisplayString>
+		<Expand>
+			<Item Name="[name]">(m_pImp)->m_strName</Item>
+		</Expand>
+	</Type>
+
+	<Type Name="AcDbObjectId">
+    <DisplayString>{{{mId}}}</DisplayString>
+    <Expand>
+      <Item Name="[mId]">mId</Item>
+    </Expand>
+  </Type>
+
+  <Type Name="AcImpObject">
+    <DisplayString>{{m_id={m_id}}}</DisplayString>
+    <Expand>
+      <Item Name="[m_Id]"               >m_id</Item>
+      <Item Name="[m_bReadEnabled]"     >m_flags.m_bReadEnabled</Item>
+      <Item Name="[m_bWriteEnabled]"    >m_flags.m_bWriteEnabled</Item>
+      <Item Name="[m_bNotifyEnabled]"   >m_flags.m_bNotifyEnabled</Item>
+      <Item Name="[m_bErased]"          >m_flags.m_bErased</Item>
+      <Item Name="[m_bGraphicsModified]">m_flags.m_bGraphicsModified</Item>
+      <Item Name="[m_bXDataModified]"   >m_flags.m_bXDataModified</Item>
+    </Expand>
+  </Type>
+
+  <Type Name="AcDbObject">
+    <DisplayString>{{m_id={((AcImpObject*)(mpImpObject))->m_id} name={(*(AcRxClass**)(((BYTE*)*(*(void***)(this)+1)+4)+*(int*)((BYTE*)*(*(void***)(this)+1)+7)+7))->m_pImp->m_strName}}}</DisplayString>
+    <Expand>
+      <ExpandedItem>mpImpObject</ExpandedItem>
+      <Item Name="[mpImpObject]">((AcImpObject*)(mpImpObject))</Item>
+			<Item Name="[AcRxClass]">*(AcRxClass**)(((BYTE*)*(*(void***)(this)+1)+4)+*(int*)((BYTE*)*(*(void***)(this)+1)+7)+7)</Item>
+    </Expand>
+  </Type>
+
+  <Type Name="AcImpEntity">
+    <Expand>
+      <Item Name="[AcDbObject]">((AcImpObject*)(this))</Item>
+    </Expand>
+  </Type>
+  
+  <Type Name="AcDbEntity">
+    <DisplayString>{{m_id={((AcImpObject*)(mpImpObject))->m_id}}}</DisplayString>
+    <Expand>
+      <Item Name="[AcDbObject]">(mpImpObject)</Item>
+      <Item Name="[mpImpObject]">((AcImpEntity*)(mpImpObject))</Item>
+    </Expand>
+  </Type>
+
+  <Type Name="AcImpCurve">
+    <Expand>
+      <Item Name="[AcDbEntity]">((AcImpEntity*)(this))</Item>
+    </Expand>
+  </Type>
+
+  <Type Name="AcDbCurve">
+    <DisplayString>{{m_id={((AcImpObject*)(mpImpObject))->m_id}}}</DisplayString>
+    <Expand>
+      <Item Name="[AcDbEntity]">((AcImpEntity*)(mpImpObject))</Item>
+      <Item Name="[mpImpObject]">((AcImpCurve*)(mpImpObject))</Item>
+    </Expand>
+  </Type>
+
+  <Type Name="AcImpLine">
+    <DisplayString>{{start={m_startPoint} end={m_endPoint}}}</DisplayString>
+    <Expand>
+      <Item Name="[m_startPoint]">m_startPoint</Item>
+      <Item Name="[m_endPoint]"  >m_endPoint</Item>
+    </Expand>
+  </Type>
+
+  <Type Name="AcDbLine">
+    <DisplayString>{{m_id={((AcImpObject*)(mpImpObject))->m_id} start={((AcImpLine*)(mpImpObject))->m_startPoint} end={((AcImpLine*)(mpImpObject))->m_endPoint}}}</DisplayString>
+    <Expand>
+      <Item Name="[AcDbCurve]">((AcImpCurve*)(mpImpObject))</Item>
+      <ExpandedItem>((AcImpLine*)(mpImpObject))</ExpandedItem>
+    </Expand>
+  </Type>
+
+  <Type Name="AcImpArc">
+    <DisplayString>{{center={m_Center} radius={m_dRadius}}}</DisplayString>
+    <Expand>
+      <Item Name="[m_Center]"     >m_Center</Item>
+      <Item Name="[m_dRadius]"    >m_dRadius</Item>
+      <Item Name="[m_dStartAngle]">m_dStartAngle</Item>
+      <Item Name="[m_dEndAngle]"  >m_dEndAngle</Item>
+    </Expand>
+  </Type>
+
+  <Type Name="AcDbArc">
+    <DisplayString>{{m_id={((AcImpObject*)(mpImpObject))->m_id} center={((AcImpArc*)(mpImpObject))->m_Center} radius={((AcImpArc*)(mpImpObject))->m_dRadius}}}</DisplayString>
+    <Expand>
+      <Item Name="[AcDbCurve]">((AcImpCurve*)(mpImpObject))</Item>
+      <ExpandedItem>((AcImpArc*)(mpImpObject))</ExpandedItem>
+    </Expand>
+  </Type>
+
+  <Type Name="AcImpCircle">
+    <DisplayString>{{center={m_Center} radius={m_dRadius}}}</DisplayString>
+    <Expand>
+      <Item Name="[m_Center]"  >m_Center</Item>
+      <Item Name="[m_dRadius]" >m_dRadius</Item>
+    </Expand>
+  </Type>
+
+  <Type Name="AcDbCircle">
+    <DisplayString>{{m_id={((AcImpObject*)(mpImpObject))->m_id} center={((AcImpCircle*)(mpImpObject))->m_Center} radius={((AcImpCircle*)(mpImpObject))->m_dRadius}}}</DisplayString>
+    <Expand>
+      <Item Name="[AcDbCurve]">((AcImpCurve*)(mpImpObject))</Item>
+      <ExpandedItem>((AcImpCircle*)(mpImpObject))</ExpandedItem>
+    </Expand>
+  </Type>
+
+  <Type Name="AcImpText">
+    <DisplayString>{{text={m_strText,su}}}</DisplayString>
+    <StringView>m_strText,su</StringView>
+    <Expand>
+      <Item Name="[m_strText]"     >m_strText,su</Item>
+      <Item Name="[m_VerticalMode]">m_flags1.m_VerticalMode</Item>
+      <Item Name="[m_dOblique]"    >m_dOblique</Item>
+      <Item Name="[m_dTextHeight]" >m_dTextHeight</Item>
+      <Item Name="[m_dWidthFactor]">m_dWidthFactor</Item>
+      <Item Name="[m_bMirroredInX]">m_flags2.m_bMirroredInX</Item>
+      <Item Name="[m_bMirroredInY]">m_flags2.m_bMirroredInY</Item>
+    </Expand>
+  </Type>
+
+  <Type Name="AcDbText">
+    <DisplayString>{{m_id={((AcImpObject*)(mpImpObject))->m_id} text={((AcImpText*)(mpImpObject))->m_strText,su}}}</DisplayString>
+    <StringView>((AcImpText*)(mpImpObject))->m_strText,su</StringView>
+    <Expand>
+      <Item Name="[AcDbEntity]">((AcImpEntity*)(mpImpObject))</Item>
+      <ExpandedItem>((AcImpText*)(mpImpObject))</ExpandedItem>
+    </Expand>
+  </Type>
+
+  <Type Name="AcImpMText">
+    <DisplayString>{{text=m_strContents,su}}}</DisplayString>
+    <StringView>m_strContents,su</StringView>
+    <Expand>
+      <Item Name="[m_strContents]"       >m_strContents,su</Item>
+      <Item Name="[m_Normal]"            >m_Normal</Item>
+      <Item Name="[m_dTextHeight]"       >m_dTextHeight</Item>
+      <Item Name="[m_dLineSpacingFactor]">m_dLineSpacingFactor</Item>
+      <Item Name="[m_FlowDirection]"     >m_FlowDirection</Item>
+    </Expand>
+  </Type>
+
+  <Type Name="AcDbMText">
+    <DisplayString>{{m_id={((AcImpObject*)(mpImpObject))->m_id} text={((AcImpMText*)(mpImpObject))->m_strContents,su}}}</DisplayString>
+    <StringView>((AcImpMText*)(mpImpObject))->m_strContents,su</StringView>
+    <Expand>
+      <Item Name="[AcDbEntity]">((AcImpEntity*)(mpImpObject))</Item>
+      <ExpandedItem>((AcImpMText*)(mpImpObject))</ExpandedItem>
     </Expand>
   </Type>
 
