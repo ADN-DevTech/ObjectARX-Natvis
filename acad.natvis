@@ -25,16 +25,16 @@
   <Type Name="AcString">
     <DisplayString Condition="mnFlags==0">""</DisplayString>
     <DisplayString Condition="mnFlags==1">{mszStr,s}</DisplayString>
-    <DisplayString Condition="mnFlags==2">{mchr.mwszStr,su}</DisplayString>
-    <DisplayString Condition="mnFlags==3">{mptr.mpszData,s}</DisplayString>
-    <DisplayString Condition="mnFlags==4">{mptr.mpwszData,su}</DisplayString>
-    <DisplayString Condition="mnFlags==5">{*(wchar_t **)(mptr.mpPtrAndData),su}</DisplayString>
+    <DisplayString Condition="mnFlags==2">{mwszStr,su}</DisplayString>
+    <DisplayString Condition="mnFlags==3">{mpszData,s}</DisplayString>
+    <DisplayString Condition="mnFlags==4">{mpwszData,su}</DisplayString>
+    <DisplayString Condition="mnFlags==5">{*(wchar_t **)(mpPtrAndData),su}</DisplayString>
     <StringView Condition="mnFlags==0">""</StringView>
     <StringView Condition="mnFlags==1">mszStr,s</StringView>
-    <StringView Condition="mnFlags==2">mchr.mwszStr,su</StringView>
-    <StringView Condition="mnFlags==3">mptr.mpszData,s</StringView>
-    <StringView Condition="mnFlags==4">mptr.mpwszData,su</StringView>
-    <StringView>mptr.mpPtrAndData</StringView>
+    <StringView Condition="mnFlags==2">mwszStr,su</StringView>
+    <StringView Condition="mnFlags==3">mpszData,s</StringView>
+    <StringView Condition="mnFlags==4">mpwszData,su</StringView>
+    <StringView>mpPtrAndData</StringView>
   </Type>
 
   <Type Name="CAdUiPathname">
