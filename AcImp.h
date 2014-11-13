@@ -46,7 +46,7 @@ struct AcObjectFlags
 class AcImpPtr
 	{
 	public:
-#if (OMF_VER >= 14)
+#if (ARX_VER >= 14)
 		void* m_dummy[8];						// Offset 0   (0)
 #else
 		void* m_dummy[4];						// Offset 0   (0)
@@ -78,9 +78,9 @@ class AcImpEntity : public AcImpObject
 	{
 	public:
 #if defined(_WIN64)
-	#if (OMF_VER < 14)
+	#if (ARX_VER < 14)
 		void* m_dummy1[17];					// Offset  40
-	#elif (OMF_VER == 14)
+	#elif (ARX_VER == 14)
 		void* m_dummy1[14];					// Offset  40
 	#else
 		void* m_dummy1[2];					// Offset  40
