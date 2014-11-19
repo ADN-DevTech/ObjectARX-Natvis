@@ -23,16 +23,16 @@
   <Type Name="AcString">
     <DisplayString Condition="mnFlags==0">""</DisplayString>
     <DisplayString Condition="mnFlags==1">{mszStr,s}</DisplayString>
-    <DisplayString Condition="mnFlags==2">{mchr.mwszStr,su}</DisplayString>
-    <DisplayString Condition="mnFlags==3">{mptr.mpszData,s}</DisplayString>
-    <DisplayString Condition="mnFlags==4">{mptr.mpwszData,su}</DisplayString>
-    <DisplayString Condition="mnFlags==5">{*(wchar_t **)(mptr.mpPtrAndData),su}</DisplayString>
+    <DisplayString Condition="mnFlags==2">{mwszStr,su}</DisplayString>
+    <DisplayString Condition="mnFlags==3">{mpszData,s}</DisplayString>
+    <DisplayString Condition="mnFlags==4">{mpwszData,su}</DisplayString>
+    <DisplayString Condition="mnFlags==5">{*(wchar_t **)(mpPtrAndData),su}</DisplayString>
     <StringView Condition="mnFlags==0">""</StringView>
     <StringView Condition="mnFlags==1">mszStr,s</StringView>
-    <StringView Condition="mnFlags==2">mchr.mwszStr,su</StringView>
-    <StringView Condition="mnFlags==3">mptr.mpszData,s</StringView>
-    <StringView Condition="mnFlags==4">mptr.mpwszData,su</StringView>
-    <StringView>mptr.mpPtrAndData</StringView>
+    <StringView Condition="mnFlags==2">mwszStr,su</StringView>
+    <StringView Condition="mnFlags==3">mpszData,s</StringView>
+    <StringView Condition="mnFlags==4">mpwszData,su</StringView>
+    <StringView>mpPtrAndData</StringView>
   </Type>
 
   <Type Name="CAdUiPathname">
@@ -124,6 +124,65 @@
     <Expand>
       <Item Name="rbnext">rbnext</Item>
       <Item Name="restype">restype</Item>
+    </Expand>
+  </Type>
+
+  <!-- 3d AcGe classes -->
+  <Type Name="AcGeLinearEnt3d">
+    <DisplayString Condition="mpImpEnt!=0">{{start={*(AcGePoint3d*)(((char*)mpImpEnt)+4*sizeof(void*))} dir={*(AcGeVector3d*)(((char*)mpImpEnt)+4*sizeof(void*)+1*sizeof(AcGePoint3d))}}}</DisplayString>
+    <Expand>
+			<Item Condition="mpImpEnt!=0" Name="[StartPoint]"> *(AcGePoint3d*)(((char*)mpImpEnt)+4*sizeof(void*))</Item>
+			<Item Condition="mpImpEnt!=0" Name="[Direction]" >*(AcGeVector3d*)(((char*)mpImpEnt)+4*sizeof(void*)+1*sizeof(AcGePoint3d))</Item>
+    </Expand>
+  </Type>
+
+  <Type Name="AcGePlanarEnt">
+		<DisplayString Condition="mpImpEnt!=0">{{origin={*(AcGePoint3d*)(((char*)mpImpEnt)+6*sizeof(void*)+32)} u={*(AcGeVector3d*)(((char*)mpImpEnt)+6*sizeof(void*)+32+sizeof(AcGePoint3d)+sizeof(AcGeVector3d))} v={*(AcGeVector3d*)(((char*)mpImpEnt)+6*sizeof(void*)+32+sizeof(AcGePoint3d))}}}</DisplayString>
+		<Expand>
+      <Item Condition="mpImpEnt!=0" Name="[Origin]"> *(AcGePoint3d*)(((char*)mpImpEnt)+6*sizeof(void*)+32)</Item>
+			<Item Condition="mpImpEnt!=0" Name="[uAxis]" >*(AcGeVector3d*)(((char*)mpImpEnt)+6*sizeof(void*)+32+sizeof(AcGePoint3d)+sizeof(AcGeVector3d))</Item>
+			<Item Condition="mpImpEnt!=0" Name="[vAxis]" >*(AcGeVector3d*)(((char*)mpImpEnt)+6*sizeof(void*)+32+sizeof(AcGePoint3d))</Item>
+    </Expand>
+  </Type>
+
+  <Type Name="AcGeBoundBlock3d">
+    <DisplayString>{{is box={*(int*)(((char*)mpImpEnt)+4*sizeof(void*))} base={*(AcGePoint3d*)(((char*)mpImpEnt)+5*sizeof(void*))} xdir={*(AcGeVector3d*)(((char*)mpImpEnt)+5*sizeof(void*)+1*sizeof(AcGePoint3d))} ydir={*(AcGeVector3d*)(((char*)mpImpEnt)+5*sizeof(void*)+1*sizeof(AcGePoint3d)+1*sizeof(AcGeVector3d))} zdir={*(AcGeVector3d*)(((char*)mpImpEnt)+5*sizeof(void*)+1*sizeof(AcGePoint3d)+2*sizeof(AcGeVector3d))}}}</DisplayString>
+    <Expand>
+			<Item Condition="mpImpEnt!=0" Name="[is Box]">*(int*)(((char*)mpImpEnt)+4*sizeof(void*))</Item>
+			<Item Condition="mpImpEnt!=0" Name="[Base]"  > *(AcGePoint3d*)(((char*)mpImpEnt)+5*sizeof(void*))</Item>
+			<Item Condition="mpImpEnt!=0" Name="[xDir]"  >*(AcGeVector3d*)(((char*)mpImpEnt)+5*sizeof(void*)+1*sizeof(AcGePoint3d))</Item>
+			<Item Condition="mpImpEnt!=0" Name="[yDir]"  >*(AcGeVector3d*)(((char*)mpImpEnt)+5*sizeof(void*)+1*sizeof(AcGePoint3d)+1*sizeof(AcGeVector3d))</Item>
+			<Item Condition="mpImpEnt!=0" Name="[zDir]"  >*(AcGeVector3d*)(((char*)mpImpEnt)+5*sizeof(void*)+1*sizeof(AcGePoint3d)+2*sizeof(AcGeVector3d))</Item>
+    </Expand>
+  </Type>
+
+  <!-- 2d AcGe classes -->
+  <Type Name="AcGeLinearEnt2d">
+		<DisplayString Condition="mpImpEnt!=0">{{start={*(AcGePoint2d*)(((char*)mpImpEnt)+4*sizeof(void*))} dir={*(AcGeVector2d*)(((char*)mpImpEnt)+4*sizeof(void*)+1*sizeof(AcGePoint3d))}}}</DisplayString>
+		<Expand>
+			<Item Condition="mpImpEnt!=0" Name="[StartPoint]"> *(AcGePoint2d*)(((char*)mpImpEnt)+4*sizeof(void*))</Item>
+			<Item Condition="mpImpEnt!=0" Name="[Direction]" >*(AcGeVector2d*)(((char*)mpImpEnt)+4*sizeof(void*)+1*sizeof(AcGePoint3d))</Item>
+		</Expand>
+	</Type>
+
+  <Type Name="AcGeBoundBlock2d">
+    <DisplayString>{{is box={*(int*)(((char*)mpImpEnt)+4*sizeof(void*))} base={*(AcGePoint2d*)(((char*)mpImpEnt)+5*sizeof(void*))} xdir={*(AcGePoint2d*)(((char*)mpImpEnt)+5*sizeof(void*)+1*sizeof(AcGePoint3d))} ydir={*(AcGePoint2d*)(((char*)mpImpEnt)+5*sizeof(void*)+1*sizeof(AcGePoint3d)+1*sizeof(AcGeVector3d))}}}</DisplayString>
+    <Expand>
+			<Item Condition="mpImpEnt!=0" Name="[is Box]">*(int*)(((char*)mpImpEnt)+4*sizeof(void*))</Item>
+			<Item Condition="mpImpEnt!=0" Name="[Base]"  > *(AcGePoint2d*)(((char*)mpImpEnt)+5*sizeof(void*))</Item>
+			<Item Condition="mpImpEnt!=0" Name="[xDir]"  >*(AcGeVector2d*)(((char*)mpImpEnt)+5*sizeof(void*)+1*sizeof(AcGePoint3d))</Item>
+			<Item Condition="mpImpEnt!=0" Name="[yDir]"  >*(AcGeVector2d*)(((char*)mpImpEnt)+5*sizeof(void*)+1*sizeof(AcGePoint3d)+1*sizeof(AcGeVector3d))</Item>
+    </Expand>
+  </Type>
+
+  <Type Name="AcGeInterval">
+    <DisplayString Condition="mpImpInt!=0">{{lower={*((double*)mpImpInt)} upper={*((double*)mpImpInt+1)} toleranz={*((double*)mpImpInt+2)}}}</DisplayString>
+    <Expand>
+			<Item Condition="mpImpInt!=0" Name="[LowerBound]">*((double*)mpImpInt)</Item>
+			<Item Condition="mpImpInt!=0" Name="[UpperBound]">*((double*)mpImpInt+1)</Item>
+			<Item Condition="mpImpInt!=0" Name="[Tolerance]" >*((double*)mpImpInt+2)</Item>
+			<Item Condition="mpImpInt!=0" Name="[BoundedAbove]" ExcludeView="simple">!!((*(long*)((double*)mpImpInt+3)) &amp; 1)</Item>
+			<Item Condition="mpImpInt!=0" Name="[BoundedBelow]" ExcludeView="simple">!!((*(long*)((double*)mpImpInt+3)) &amp; 2)</Item>
     </Expand>
   </Type>
 
