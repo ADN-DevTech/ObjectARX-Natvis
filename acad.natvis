@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <AutoVisualizer xmlns="http://schemas.microsoft.com/vstudio/debugger/natvis/2010">
 
-  <!-- Version 1.0f 20nov14 -->
+  <!-- Version 1.1a 9dec14 -->
   <!-- for acad/arx types -->
 
   <Type Name="AcArray&lt;*&gt;">
@@ -181,8 +181,6 @@
 			<Item Condition="mpImpInt!=0" Name="[LowerBound]">*((double*)mpImpInt)</Item>
 			<Item Condition="mpImpInt!=0" Name="[UpperBound]">*((double*)mpImpInt+1)</Item>
 			<Item Condition="mpImpInt!=0" Name="[Tolerance]" >*((double*)mpImpInt+2)</Item>
-			<Item Condition="mpImpInt!=0" Name="[BoundedAbove]" ExcludeView="simple">!!((*(long*)((double*)mpImpInt+3)) &amp; 1)</Item>
-			<Item Condition="mpImpInt!=0" Name="[BoundedBelow]" ExcludeView="simple">!!((*(long*)((double*)mpImpInt+3)) &amp; 2)</Item>
     </Expand>
   </Type>
 
