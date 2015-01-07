@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <AutoVisualizer xmlns="http://schemas.microsoft.com/vstudio/debugger/natvis/2010">
 
-  <!-- Version 1.1c 14dec14 -->
+  <!-- Version 1.1d 4jan15 -->
   <!-- for acad/arx types -->
 
   <Type Name="AcArray&lt;*&gt;">
@@ -125,6 +125,48 @@
       <Item Name="rbnext">rbnext</Item>
       <Item Name="restype">restype</Item>
     </Expand>
+  </Type>
+
+  <Type Name="AcValue">
+      <DisplayString Condition="mpImpObj==0">"imp==0?"</DisplayString>
+      <DisplayString Condition="*((int *)(((void **)mpImpObj)+2))==0">(uninitialized)</DisplayString>
+      <DisplayString Condition="*((int *)(((void **)mpImpObj)+2))==1">
+                {*(int *)(((void **)mpImpObj)+3)} (long)</DisplayString>
+      <DisplayString Condition="*((int *)(((void **)mpImpObj)+2))==2">
+                {*(double *)(((void **)mpImpObj)+3)} (double)</DisplayString>
+      <DisplayString Condition="*((int *)(((void **)mpImpObj)+2))==4">
+                {*(wchar_t **)(((void **)mpImpObj)+3)} (string)</DisplayString>
+      <DisplayString Condition="*((int *)(((void **)mpImpObj)+2))==8 &amp;&amp; *(((void **)mpImpObj)+3) == 0">(null date)</DisplayString>
+      <DisplayString Condition="*((int *)(((void **)mpImpObj)+2))==8">
+              {*((*(short **)(((void **)mpImpObj)+3))+4),d}:{
+               *((*(short **)(((void **)mpImpObj)+3))+5),d}:{
+               *((*(short **)(((void **)mpImpObj)+3))+6),d} {
+               *((*(short **)(((void **)mpImpObj)+3))+1),d}/{
+               *((*(short **)(((void **)mpImpObj)+3))+3),d}/{
+               *((*(short **)(((void **)mpImpObj)+3))+0),d} (date)</DisplayString>
+      <DisplayString Condition="*((int *)(((void **)mpImpObj)+2))==16 &amp;&amp; *(((void **)mpImpObj)+3) == 0">(null point)</DisplayString>
+      <DisplayString Condition="*((int *)(((void **)mpImpObj)+2))==16">
+              {*((*(double **)(((void **)mpImpObj)+3))+0)},{
+               *((*(double **)(((void **)mpImpObj)+3))+1)} (point)</DisplayString>
+      <DisplayString Condition="*((int *)(((void **)mpImpObj)+2))==32 &amp;&amp; *(((void **)mpImpObj)+3) == 0">(null 3dpoint)</DisplayString>
+      <DisplayString Condition="*((int *)(((void **)mpImpObj)+2))==32">
+              {*((*(double **)(((void **)mpImpObj)+3))+0)},{
+               *((*(double **)(((void **)mpImpObj)+3))+1)},{
+               *((*(double **)(((void **)mpImpObj)+3))+2)} (3dpoint)</DisplayString>
+      <DisplayString Condition="*((int *)(((void **)mpImpObj)+2))==64 &amp;&amp; *(((void **)mpImpObj)+3) == 0">(null objectId)</DisplayString>
+      <DisplayString Condition="*((int *)(((void **)mpImpObj)+2))==64">
+              {**(((void ***)mpImpObj)+3)} (objectId)</DisplayString>
+      <DisplayString Condition="*((int *)(((void **)mpImpObj)+2))==128">(buffer len = {
+              *((int *)(((void **)mpImpObj)+4))})</DisplayString>
+      <DisplayString Condition="*((int *)(((void **)mpImpObj)+2))==256 &amp;&amp; *(((void **)mpImpObj)+3) == 0">(null resbuf)</DisplayString>
+      <DisplayString Condition="*((int *)(((void **)mpImpObj)+2))==256">
+              {**(((resbuf ***)mpImpObj)+3)} (resbuf)</DisplayString>
+      <DisplayString Condition="*((int *)(((void **)mpImpObj)+2))==512">
+                {*(wchar_t **)(((void **)mpImpObj)+3)} (general)</DisplayString>
+      <DisplayString Condition="*((int *)(((void **)mpImpObj)+2))==1024 &amp;&amp; *(((void **)mpImpObj)+3) == 0">(null color)</DisplayString>
+      <DisplayString Condition="*((int *)(((void **)mpImpObj)+2))==1024">(color len = {
+              *((int *)(((void **)mpImpObj)+4))})</DisplayString>
+      <DisplayString Condition="1">Unknown type {*((int *)(((void **)mpImpObj)+2))}</DisplayString>
   </Type>
 
   <!-- 3d AcGe classes -->
